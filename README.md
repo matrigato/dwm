@@ -82,6 +82,6 @@ License
 ------------
 In jurisdictions that recognize copyright laws, the following licenses apply:
 
-dwm is available under the [MIT/X Consortium License](LICENSES/MIT).
+[dwm](https://git.suckless.org/dwm) is available under the [MIT/X Consortium License](LICENSES/MIT).
 
 Everything made by me is under [The Unlicense](LICENSES/UNLICENSE).
