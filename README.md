@@ -38,12 +38,13 @@ the DISPLAY environment variable is set correctly, e.g.:
 In order to display status info in the bar, you can do something
 like this in your .xinitrc:
 
-	while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
-	do
-		sleep 1
-	done &
-	exec dwm
-
+```sh
+while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
+do
+	sleep 1
+done &
+exec dwm
+```
 
 Configuration
 -------------
@@ -62,21 +63,23 @@ Yes, but actually no. You can start dwm in a _while_ loop to reload it while not
 
 For example, if you use the following code (taken from the [Arch Wiki](https://wiki.archlinux.org/index.php/Dwm)) instead of just using `exec dwm` in your .xinitrc, quitting dwm will reload it if the executable has been rebuilt.
 
-	# relaunch DWM if the binary changes, otherwise bail
-	csum=""
+```sh
+# relaunch DWM if the binary changes, otherwise bail
+csum=""
+new_csum=$(sha1sum $(which dwm))
+while true
+do
+	if [ "$csum" != "$new_csum" ]
+	then
+		csum=$new_csum
+		dwm
+	else
+		exit 0
+	fi
 	new_csum=$(sha1sum $(which dwm))
-	while true
-	do
-		if [ "$csum" != "$new_csum" ]
-		then
-			csum=$new_csum
-			dwm
-		else
-			exit 0
-		fi
-		new_csum=$(sha1sum $(which dwm))
-		sleep 0.5
-	done
+	sleep 0.5
+done
+```
 
 License
 ------------
